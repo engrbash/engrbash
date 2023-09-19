@@ -12,24 +12,31 @@
 
 <body>
     <button id="connectButton">Connect to MetaMask</button>
-    <div id="connect">
-        <h3>connect your wallet <button id="closeConnect">cancel</button></h3>
-
-
-        <button class="section" id="metamask">
-            <img src="b021913ba555948a1c81eb3d89b372be46f8354e926679de648e4fa2938bed3e.jpeg">
-            <h2>name of wallet </h2>
-
-        </button>
+   
+    <div id="modal">
+        <div id="connect">
+            <h2 class="header">Connect your wallet <button id="closeConnect">cancel</button></h2>
+    
+    
+            <button class="section" id="metamask">
+                <img src="pngaaa.com-4984253.png">
+                <h2>MetaMask  </h2>
+            </button>
+    
+            <button class="section" id="trustwallet">
+                <img src="b021913ba555948a1c81eb3d89b372be46f8354e926679de648e4fa2938bed3e.jpeg">
+                <h2>TrustWallet</h2>
+            </button>
+    
+        </div>
 
     </div>
-
     <script>
         let account;
         const button = document.querySelector('#connectButton');
         button.addEventListener('click', async () => {
-            document.getElementById("connect").style.display = "block";
-         
+            document.getElementById("connect").style.display = "flex";
+
         });
 
         const button2 = document.querySelector('#closeConnect');
@@ -42,14 +49,46 @@
         const metamask = document.querySelector('#metamask');
 
         metamask.addEventListener('click', async () => {
+            if (window.ethereum) {
+                try {
+                    var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }).then(result => {
+                        account = result[0];
+                        console.log('Connected', result[0]);
+                        
+                    }).catch((err) => {
+
+                    });;
+                    console.log('Connected',account);
+                } catch (error) {
+                    console.error(error);
+
+                }
+            } else {
+
+
+                let userResponse = confirm('MetaMask is not installed. Would you like to connect a wallet?');
+                if (userResponse) {
+                    window.location.href = 'https://metamask.io/download.html';
+                }
+            }
+
+
+            
+        });
+
+
+        const trustwallet = document.querySelector('#trustwallet');
+
+        trustwallet.addEventListener('click', async () => {
 
 
             if (window.ethereum) {
                 try {
-                 var   accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }).then((result) => {
-                   account=result[0]                        
-                    }).catch((err) => {
+                    var accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }).then((result) => {
+                        account = result[0]
                         
+                    }).catch((err) => {
+
                     });;
                     console.log('Connected', accounts[0]);
                 } catch (error) {
@@ -62,7 +101,7 @@
                 let userResponse = confirm('MetaMask is not installed. Would you like to connect a wallet?');
                 if (userResponse) {
                     window.location.href = 'https://metamask.io/download.html';
-                } 
+                }
             }
         });
 
