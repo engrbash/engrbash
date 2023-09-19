@@ -25,22 +25,14 @@
     </div>
 
     <script>
-         let account;
-
-
+        let account;
         const button = document.querySelector('#connectButton');
-
-       
-      
-
-
         button.addEventListener('click', async () => {
             document.getElementById("connect").style.display = "block";
          
         });
 
         const button2 = document.querySelector('#closeConnect');
-
         button2.addEventListener('click', async () => {
 
             document.getElementById("connect").style.display = "none";
@@ -70,15 +62,8 @@
                 let userResponse = confirm('MetaMask is not installed. Would you like to connect a wallet?');
                 if (userResponse) {
                     window.location.href = 'https://metamask.io/download.html';
-                }
-
-              
+                } 
             }
-
-
-
-           
-
         });
 
     </script>
