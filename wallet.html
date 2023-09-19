@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Connect to MetaMask</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4-rc.1/web3.min.js"> </script>
+
+    <link href="connet.css" rel="stylesheet" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <button id="connectButton">Connect to MetaMask</button>
+    <div id="connect">
+        <h3>connect your wallet <button id="closeConnect">cancel</button></h3>
+
+
+        <button class="section" id="metamask">
+            <img src="b021913ba555948a1c81eb3d89b372be46f8354e926679de648e4fa2938bed3e.jpeg">
+            <h2>name of wallet </h2>
+
+        </button>
+
+    </div>
+
+    <script>
+         let account;
+
+
+        const button = document.querySelector('#connectButton');
+
+       
+      
+
+
+        button.addEventListener('click', async () => {
+            document.getElementById("connect").style.display = "block";
+         
+        });
+
+        const button2 = document.querySelector('#closeConnect');
+
+        button2.addEventListener('click', async () => {
+
+            document.getElementById("connect").style.display = "none";
+
+
+        });
+        const metamask = document.querySelector('#metamask');
+
+        metamask.addEventListener('click', async () => {
+
+
+            if (window.ethereum) {
+                try {
+                 var   accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }).then((result) => {
+                   account=result[0]                        
+                    }).catch((err) => {
+                        
+                    });;
+                    console.log('Connected', accounts[0]);
+                } catch (error) {
+                    console.error(error);
+
+                }
+            } else {
+
+
+                let userResponse = confirm('MetaMask is not installed. Would you like to connect a wallet?');
+                if (userResponse) {
+                    window.location.href = 'https://metamask.io/download.html';
+                }
+
+              
+            }
+
+
+
+           
+
+        });
+
+    </script>
+</body>
+
+</html>
